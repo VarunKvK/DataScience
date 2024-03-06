@@ -16,11 +16,31 @@ set_df.count()
 set_df.sort_values("year")
 set_df[set_df.year==1949]
 set_df.sort_values("num_parts",ascending=False).head()
-##This 
 set_year=set_df.groupby("year").count()
 set_year.num_parts.head()
 
+theme_year=set_df.groupby("year").agg({"theme_id":pd.Series.nunique})
+theme_year.rename(columns={"theme_id":"nr_theme"},inplace=True)
+theme_year
+
+
 #Plotting Graph using matplot
 plt.figure(figsize=(8,6))
-plt.plot(set_year.index[:-2],set_year.set_num[:-2])
+ax1=plt.gca()
+ax2=ax1.twinx()
+ax1.plot(set_year.index[:-2],set_year.set_num[:-2],color="blue")
+ax2.plot(theme_year.index[:-2],theme_year.nr_theme[:-2],color="green")
 
+ax1.set_xlabel("Year")
+ax1.set_ylabel("Sets",color="blue")
+ax2.set_ylabel("Themes",color="green")
+
+#Scatter Plotting
+avg_parts=set_df.groupby("year").agg({"num_parts":pd.Series.mean})
+parts_avg=avg_parts.rename(columns={"num_parts":"avg"})
+parts_avg.head()
+parts_avg.tail()
+
+plt.figure(figsize=(10,6))
+plt.xlabel("Number of parts")
+plt.scatter(parts_avg.index[:-2],parts_avg.avg[:-2])
