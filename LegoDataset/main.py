@@ -2,14 +2,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-#LEgo Color Datset
+#Lego Color Datset ################################################################
 color_df=pd.read_csv("colors.csv")
 color_df["name"].nunique()
 color_df.head()
 color_df.groupby("is_trans").count()
 color_df.is_trans.value_counts()
 
-#Lego Sets DataSets
+#Lego Sets DataSets ################################################################
 set_df=pd.read_csv("sets.csv")
 set_df.head()
 set_df.count()
@@ -44,3 +44,9 @@ parts_avg.tail()
 plt.figure(figsize=(10,6))
 plt.xlabel("Number of parts")
 plt.scatter(parts_avg.index[:-2],parts_avg.avg[:-2])
+
+#Lego Theme Dataset ################################################################
+theme_df=pd.read_csv("themes.csv")
+clean_theme=theme_df.dropna()
+clean_theme.count()
+clean_theme["id"].value_counts()
