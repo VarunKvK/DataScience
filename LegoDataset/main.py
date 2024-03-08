@@ -49,4 +49,28 @@ plt.scatter(parts_avg.index[:-2],parts_avg.avg[:-2])
 theme_df=pd.read_csv("themes.csv")
 clean_theme=theme_df.dropna()
 clean_theme.count()
-clean_theme["id"].value_counts()
+
+
+#Relational Database Scheme
+
+#setdata
+theme_data=set_df["theme_id"].value_counts()
+theme_data=pd.DataFrame({'id':theme_data.index, 'theme_count':theme_data.values})
+theme_data.head()
+
+#themedata
+theme_data[:5]
+clean_theme[clean_theme.name== "Star Wars"] 
+set_df[set_df.theme_id==18]
+
+merege_data=pd.merge(theme_data,theme_df,on="id")
+merege_data=pd.merge(theme_data,clean_theme,on="id")
+merege_data.head()
+
+#BarChart
+plt.figure(figsize=(10,6))
+plt.bar(merege_data.name[:10],merege_data.theme_count[:10])
+plt.xlabel("ThemeCount",fontsize=14)
+plt.xticks(fontsize=14,rotation=90)
+plt.ylabel("Id",fontsize=14)
+plt.show()
