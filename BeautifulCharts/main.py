@@ -92,3 +92,14 @@ df_free_vs_paid
 free_vs_paid_chart=px.bar(df_free_vs_paid[:15],x="Category",y="App",title="Free vs Paid", barmode='group',color="Type")
 free_vs_paid_chart.update_layout(xaxis_title="App", yaxis_title="Category")
 free_vs_paid_chart
+
+fig=px.box(df_free_vs_paid,x="Type" ,y="App")
+fig.update_layout(yaxis=(dict(type="log")))
+fig.show()
+
+paid_app=df[df.Type=="Paid"]
+paid_app
+fig_num=px.box(paid_app,x="Category",y="Revenue_Estimate")
+# fig_num.update_layout(yaxis=(dict(type="log")),xaxis={"categoryorder":"min ascending"})
+fig_num.update_layout(yaxis=(dict(type="log")),xaxis={"categoryorder":"max descending"})
+fig_num.show()
