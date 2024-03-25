@@ -1,6 +1,7 @@
 import numpy as np
 from numpy.random import random
 import matplotlib.pyplot as plt
+import matplotlib
 from scipy import misc
 from PIL import Image 
 
@@ -44,3 +45,22 @@ plt.show()
 
 noise=random((123,125,3))
 plt.imshow(noise)
+
+v1=np.array([[1,2,3,4],[4,2,3,2]])
+v2=np.array([[1,4,6,8],[4,7,2,1]])
+
+img=misc.face()
+img
+type(img)
+img.shape
+sRGB=img/255
+flipped_array=np.flip(sRGB)
+flipped_array
+grey_values=np.array([0.2126,0.7152,0.0722])
+b_w=sRGB@grey_values
+b_w
+plt.imshow(b_w,cmap='gray')
+plt.imshow(255-img)
+plt.imshow(flipped_array)
+plt.imshow(np.rot90(sRGB))
+
